@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality Confecciones</title>
+  
+  <!-- Fuentes modernas de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* PALETA DE COLORES EXTRAÍDA DE LA TARJETA Y DISEÑO PREMIUM */
+    :root {
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-gradient: linear-gradient(135deg, #e6c875 0%, #d4af37 50%, #997a15 100%);
+      --dark-bg: #0b0d10;
+      --glass-bg: rgba(18, 22, 28, 0.65);
+      --glass-border: rgba(212, 175, 55, 0.25);
+      --text-main: #ffffff;
+      --text-sub: #d0d7de;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* VIDEO DE FONDO EN PANTALLA COMPLETA */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      filter: brightness(0.35) contrast(1.1) blur(3px);
+      transform: scale(1.03); /* Evita bordes blancos por el blur */
+    }
+
+    /* OVERLAY CON GRADIENTE DE SOMBRA */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(11, 13, 16, 0.2) 0%, rgba(11, 13, 16, 0.85) 100%);
+      z-index: 2;
+    }
+
+    /* TARJETA PRINCIPAL CRISTAL */
+    .main-card {
+      position: relative;
+      z-index: 3;
+      width: 90%;
+      max-width: 460px;
+      padding: 40px 28px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7),
+                  0 0 40px rgba(212, 175, 55, 0.12);
+      text-align: center;
+      animation: floatIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* LOGO / MARCA */
+    .brand-logo {
+      width: 55px;
+      height: 55px;
+      margin: 0 auto 16px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .brand-logo svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--gold-primary);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 28px;
+    }
+
+    /* MARCO DEL VIDEO DENTRO DE LA CARD */
+    .video-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* BOTÓN PRINCIPAL LLAMATIVO */
+    .btn-action {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 18px 30px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #0c0e12;
+      background: var(--gold-gradient);
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* EFECTO DE DESTELLO EN EL BOTÓN */
+    .btn-action::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.7s ease;
+    }
+
+    .btn-action:hover::before {
+      left: 100%;
+    }
+
+    .btn-action:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+      color: #000;
+    }
+
+    .btn-action:active {
+      transform: translateY(-1px);
+    }
+
+    /* ANIMACIÓN */
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* ADAPTABILIDAD EN PANTALLAS CHICAS */
+    @media (max-width: 480px) {
+      .main-card {
+        padding: 32px 20px;
+      }
+      .brand-title {
+        font-size: 1.8rem;
+      }
+      .btn-action {
+        font-size: 0.85rem;
+        padding: 16px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video de fondo amplio -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="video_1.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Capa oscura de contraste -->
+  <div class="overlay"></div>
+
+  <!-- Tarjeta Central -->
+  <main class="main-card">
+    
+    <!-- Ícono / Isotipo elegante -->
+    <div class="brand-logo">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+    </div>
+
+    <!-- Títulos -->
+    <h1 class="brand-title">Quality</h1>
+    <p class="brand-subtitle">Confecciones</p>
+
+    <!-- Ventana de Video Central -->
+    <div class="video-box">
+      <video autoplay muted loop playsinline poster="">
+        <source src="video_1.mp4" type="video/mp4" />
+        Tu navegador no soporta video.
+      </video>
+    </div>
+
+    <!-- Botón con redirección -->
+    <a href="https://qualiconf-xzmwn5at.manus.space/" class="btn-action" target="_blank" rel="noopener">
+      Ver Página de Inicio &rarr;
+    </a>
+
+  </main>
+
+</body>
+</html>
