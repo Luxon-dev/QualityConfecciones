@@ -708,6 +708,47 @@
     window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
   }
 </script>
+  <!-- NOTIFICACIÓN DE PRUEBA SOCIAL -->
+<style>
+  .social-proof {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    background: #0f1319;
+    border: 1px solid var(--glass-border);
+    padding: 12px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    z-index: 999;
+    font-size: 0.8rem;
+    color: #fff;
+    animation: fadeIn 0.5s ease;
+  }
+  .social-proof-icon {
+    font-size: 1.2rem;
+  }
+</style>
+
+<div class="social-proof" id="socialProof" style="display: none;">
+  <span class="social-proof-icon">🛍️</span>
+  <div>
+    <strong>Nuevo pedido recibido</strong>
+    <div style="color: var(--text-sub); font-size: 0.72rem;">Colegio solicitó 50 chombas bordadas</div>
+  </div>
+</div>
+
+<script>
+  // Muestra la notificación a los 4 segundos de entrar a la web
+  setTimeout(() => {
+    document.getElementById('socialProof').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('socialProof').style.display = 'none';
+    }, 5000);
+  }, 4000);
+</script>
 
 </body>
 </html>
