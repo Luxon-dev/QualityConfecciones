@@ -446,6 +446,121 @@
       moveSlide(1);
     }, 4000);
   </script>
+  <!-- ESTILOS ADICIONALES PARA BOTÓN FLOTANTE Y FAQ -->
+<style>
+  /* BOTÓN WHATSAPP FLOTANTE */
+  .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+  }
+
+  /* ACORDEÓN FAQ */
+  .faq-section {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  .faq-item {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .faq-question {
+    padding: 18px 20px;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-answer {
+    padding: 0 20px 18px 20px;
+    color: var(--text-sub);
+    font-size: 0.9rem;
+    display: none;
+    line-height: 1.5;
+  }
+</style>
+
+<!-- BOTÓN WHATSAPP FLOTANTE -->
+<a href="https://wa.me/5491131457691?text=Hola,%20quisiera%20consultar%20por%20presupuestos%20de%20confecci%C3%B3n." class="whatsapp-float" target="_blank" rel="noopener">
+  💬
+</a>
+
+<!-- SECCIÓN PREGUNTAS FRECUENTES -->
+<section class="faq-section">
+  <h2 class="section-title" style="text-align: center; font-size: 1.8rem;">Preguntas Frecuentes</h2>
+  <br>
+  
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      ¿Cuál es la cantidad mínima de pedido? <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Confeccionamos tanto pedidos corporativos por mayor como lotes personalizados. Consultanos según el tipo de prenda.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      ¿Hacen envíos a todo el país? <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Sí, realizamos despachos a todo el territorio argentino a través de transporte prioritario y encomiendas.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      ¿Cómo solicito una muestra o cotización? <span>+</span>
+    </button>
+    <div class="faq-answer">
+      Completá el formulario de contacto o escribinos directamente por WhatsApp indicando el tipo de prenda, cantidades y logo si requiere bordado o estampado.
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPT PARA INTERACTIVIDAD FAQ -->
+<script>
+  function toggleFaq(button) {
+    const answer = button.nextElementSibling;
+    const isVisible = answer.style.display === 'block';
+    
+    document.querySelectorAll('.faq-answer').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.faq-question span').forEach(el => el.innerText = '+');
+    
+    if (!isVisible) {
+      answer.style.display = 'block';
+      button.querySelector('span').innerText = '-';
+    }
+  }
+</script>
 
 </body>
 </html>
