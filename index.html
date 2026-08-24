@@ -16,7 +16,7 @@
       --gold-light: #f3e5ab;
       --gold-gradient: linear-gradient(135deg, #e6c875 0%, #d4af37 50%, #997a15 100%);
       --dark-bg: #0b0d10;
-      --glass-bg: rgba(18, 22, 28, 0.82);
+      --glass-bg: rgba(18, 22, 28, 0.85);
       --glass-border: rgba(212, 175, 55, 0.3);
       --input-bg: rgba(255, 255, 255, 0.06);
       --text-main: #ffffff;
@@ -64,7 +64,7 @@
       z-index: 2;
     }
 
-    /* CARD PRINCIPAL AMPLIADA */
+    /* CARD PRINCIPAL */
     .main-card {
       position: relative;
       z-index: 3;
@@ -101,7 +101,7 @@
       margin-bottom: 20px;
     }
 
-    /* PESTAÑAS (TABS) DE NAVEGACIÓN DENTRO DE LA CARD */
+    /* PESTAÑAS (TABS) */
     .tab-buttons {
       display: flex;
       gap: 10px;
@@ -173,10 +173,6 @@
       flex-direction: column;
     }
 
-    .form-group.full-width {
-      grid-column: span 2;
-    }
-
     .form-group label {
       font-size: 0.75rem;
       color: var(--gold-primary);
@@ -240,7 +236,6 @@
 
     @media (max-width: 580px) {
       .form-grid { grid-template-columns: 1fr; }
-      .form-group.full-width { grid-column: span 1; }
       .main-card { padding: 25px 18px; }
     }
   </style>
@@ -259,13 +254,13 @@
     <h1 class="brand-title">Quality</h1>
     <p class="brand-subtitle">Confecciones</p>
 
-    <!-- Selector de pestañas -->
+    <!-- Pestañas -->
     <div class="tab-buttons">
       <button class="tab-btn active" onclick="switchTab('video-tab', this)">Presentación</button>
       <button class="tab-btn" onclick="switchTab('form-tab', this)">Registrarse</button>
     </div>
 
-    <!-- Pestaña 1: Video + Botón de Redirección -->
+    <!-- Pestaña Video -->
     <div id="video-tab" class="tab-content active">
       <div class="video-box">
         <video autoplay muted loop playsinline>
@@ -277,26 +272,30 @@
       </a>
     </div>
 
-    <!-- Pestaña 2: Formulario de Registro enviado a tu mail -->
+    <!-- Pestaña Formulario de Registro -->
     <div id="form-tab" class="tab-content">
-      <!-- REMPLAZÁ TU_EMAIL_AQUI@GMAIL.COM POR TU CORREO REAL -->
-      <form action="https://formspree.io/f/qualityconfecciones.online@gmail.com" method="POST">
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <!-- Clave de envío vinculada a tu mail -->
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+        <input type="hidden" name="subject" value="Nuevo Registro - Quality Confecciones" />
+        <input type="hidden" name="from_name" value="Quality Confecciones Web" />
+
         <div class="form-grid">
           <div class="form-group">
             <label>Nombre y Apellido</label>
-            <input type="text" name="nombre" placeholder="Juan Pérez" required />
+            <input type="text" name="Nombre" placeholder="Juan Pérez" required />
           </div>
           <div class="form-group">
             <label>Teléfono / WhatsApp</label>
-            <input type="tel" name="telefono" placeholder="11 1234 5678" required />
+            <input type="tel" name="Telefono" placeholder="11 1234 5678" required />
           </div>
           <div class="form-group">
             <label>Correo Electrónico</label>
-            <input type="email" name="email" placeholder="usuario@email.com" required />
+            <input type="email" name="Email" placeholder="usuario@email.com" required />
           </div>
           <div class="form-group">
             <label>Localidad / Ciudad</label>
-            <input type="text" name="localidad" placeholder="Buenos Aires" required />
+            <input type="text" name="Localidad" placeholder="Buenos Aires" required />
           </div>
         </div>
         <button type="submit" class="btn-action">
