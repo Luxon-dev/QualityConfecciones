@@ -561,6 +561,153 @@
     }
   }
 </script>
+  <!-- ESTILOS Y ESTRUCTURA DEL CHAT VIRTUAL -->
+<style>
+  /* Botón burbuja flotante */
+  .chat-widget-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: var(--gold-gradient);
+    color: #000;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+  }
+  .chat-widget-btn:hover {
+    transform: scale(1.08);
+  }
+
+  /* Ventana del Chat */
+  .chat-box {
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    width: 330px;
+    background: #0f1319;
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+  }
+
+  .chat-header {
+    background: var(--gold-gradient);
+    color: #000;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .chat-avatar {
+    width: 32px;
+    height: 32px;
+    background: #000;
+    color: var(--gold-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  .chat-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .chat-msg {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .chat-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chat-opt-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--gold-primary);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .chat-opt-btn:hover {
+    background: var(--gold-primary);
+    color: #000;
+  }
+</style>
+
+<!-- BOTÓN Y VENTANA DE CHAT -->
+<div class="chat-widget-btn" onclick="toggleChat()">💬</div>
+
+<div class="chat-box" id="chatBox">
+  <div class="chat-header">
+    <div class="chat-avatar">Q</div>
+    <div>
+      <div>Asistente Quality</div>
+      <div style="font-size: 0.68rem; font-weight: 400; opacity: 0.8;">En línea</div>
+    </div>
+  </div>
+  
+  <div class="chat-body">
+    <div class="chat-msg">
+      ¡Hola! 👋 Bienvenido a Quality Confecciones. ¿En qué te podemos asesorar hoy?
+    </div>
+    
+    <div class="chat-options">
+      <button class="chat-opt-btn" onclick="sendChatOption('Uniformes escolares')">🏫 Presupuesto Uniformes Escolares</button>
+      <button class="chat-opt-btn" onclick="sendChatOption('Ropa de trabajo')">🛠️ Cotizar Ropa de Trabajo</button>
+      <button class="chat-opt-btn" onclick="sendChatOption('Confección personalizada')">🎨 Indumentaria Personalizada</button>
+      <button class="chat-opt-btn" onclick="sendChatOption('Hablar con asesor')">👤 Hablar directamente con un Asesor</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT PARA ABRIR/CERRAR Y REDIRIGIR -->
+<script>
+  function toggleChat() {
+    const chat = document.getElementById('chatBox');
+    chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  function sendChatOption(tipo) {
+    const telefono = "5491112345678"; // Reemplazá con tu número de WhatsApp
+    const mensaje = encodeURIComponent(`Hola Quality Confecciones, quisiera solicitar información sobre: ${tipo}.`);
+    window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+  }
+</script>
 
 </body>
 </html>
