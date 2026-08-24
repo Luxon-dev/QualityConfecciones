@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quality Confecciones</title>
   
-  <!-- Fuentes modernas de Google -->
+  <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* PALETA DE COLORES EXTRAÍDA DE LA TARJETA Y DISEÑO PREMIUM */
     :root {
       --gold-primary: #d4af37;
       --gold-light: #f3e5ab;
       --gold-gradient: linear-gradient(135deg, #e6c875 0%, #d4af37 50%, #997a15 100%);
       --dark-bg: #0b0d10;
-      --glass-bg: rgba(18, 22, 28, 0.65);
-      --glass-border: rgba(212, 175, 55, 0.25);
+      --glass-bg: rgba(18, 22, 28, 0.82);
+      --glass-border: rgba(212, 175, 55, 0.3);
+      --input-bg: rgba(255, 255, 255, 0.06);
       --text-main: #ffffff;
-      --text-sub: #d0d7de;
+      --text-sub: #cbd5e1;
     }
 
     * {
@@ -41,7 +41,7 @@
       align-items: center;
     }
 
-    /* VIDEO DE FONDO EN PANTALLA COMPLETA */
+    /* VIDEO DE FONDO */
     .bg-video {
       position: fixed;
       top: 0;
@@ -50,57 +50,36 @@
       height: 100%;
       object-fit: cover;
       z-index: 1;
-      filter: brightness(0.35) contrast(1.1) blur(3px);
-      transform: scale(1.03); /* Evita bordes blancos por el blur */
+      filter: brightness(0.3) contrast(1.1) blur(4px);
+      transform: scale(1.03);
     }
 
-    /* OVERLAY CON GRADIENTE DE SOMBRA */
     .overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, rgba(11, 13, 16, 0.2) 0%, rgba(11, 13, 16, 0.85) 100%);
+      background: radial-gradient(circle at center, rgba(11, 13, 16, 0.3) 0%, rgba(11, 13, 16, 0.9) 100%);
       z-index: 2;
     }
 
-    /* TARJETA PRINCIPAL CRISTAL */
+    /* CARD PRINCIPAL AMPLIADA */
     .main-card {
       position: relative;
       z-index: 3;
-      width: 90%;
-      max-width: 460px;
-      padding: 40px 28px;
+      width: 92%;
+      max-width: 650px;
+      padding: 35px 30px;
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
-      border-radius: 28px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7),
-                  0 0 40px rgba(212, 175, 55, 0.12);
+      border-radius: 24px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8),
+                  0 0 40px rgba(212, 175, 55, 0.15);
       text-align: center;
-      animation: floatIn 1s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* LOGO / MARCA */
-    .brand-logo {
-      width: 55px;
-      height: 55px;
-      margin: 0 auto 16px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-    }
-
-    .brand-logo svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--gold-primary);
+      animation: floatIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .brand-title {
@@ -111,46 +90,126 @@
       background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 4px;
     }
 
     .brand-subtitle {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--gold-primary);
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
 
-    /* MARCO DEL VIDEO DENTRO DE LA CARD */
+    /* PESTAÑAS (TABS) DE NAVEGACIÓN DENTRO DE LA CARD */
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 22px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 5px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      background: transparent;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--gold-gradient);
+      color: #000;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    /* SECCIONES DINÁMICAS */
+    .tab-content {
+      display: none;
+      animation: fadeInTab 0.4s ease forwards;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* CONTENEDOR DE VIDEO */
     .video-box {
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
       border-radius: 16px;
       overflow: hidden;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
     .video-box video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
-    /* BOTÓN PRINCIPAL LLAMATIVO */
+    /* FORMULARIO MODERNO */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      color: var(--gold-primary);
+      margin-bottom: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-group input {
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    }
+
+    /* BOTÓN ACCIÓN */
     .btn-action {
-      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 18px 30px;
-      font-size: 0.95rem;
+      padding: 16px;
+      font-size: 0.9rem;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -160,102 +219,103 @@
       border-radius: 50px;
       text-decoration: none;
       cursor: pointer;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* EFECTO DE DESTELLO EN EL BOTÓN */
-    .btn-action::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: left 0.7s ease;
-    }
-
-    .btn-action:hover::before {
-      left: 100%;
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+      transition: all 0.3s ease;
     }
 
     .btn-action:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
-      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(212, 175, 55, 0.5);
     }
 
-    .btn-action:active {
-      transform: translateY(-1px);
-    }
-
-    /* ANIMACIÓN */
     @keyframes floatIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ADAPTABILIDAD EN PANTALLAS CHICAS */
-    @media (max-width: 480px) {
-      .main-card {
-        padding: 32px 20px;
-      }
-      .brand-title {
-        font-size: 1.8rem;
-      }
-      .btn-action {
-        font-size: 0.85rem;
-        padding: 16px 20px;
-      }
+    @keyframes fadeInTab {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 580px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+      .main-card { padding: 25px 18px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Video de fondo amplio -->
+  <!-- Video de Fondo -->
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="video_1.mp4" type="video/mp4" />
   </video>
-
-  <!-- Capa oscura de contraste -->
   <div class="overlay"></div>
 
-  <!-- Tarjeta Central -->
+  <!-- Contenedor Principal -->
   <main class="main-card">
     
-    <!-- Ícono / Isotipo elegante -->
-    <div class="brand-logo">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-      </svg>
-    </div>
-
-    <!-- Títulos -->
     <h1 class="brand-title">Quality</h1>
     <p class="brand-subtitle">Confecciones</p>
 
-    <!-- Ventana de Video Central -->
-    <div class="video-box">
-      <video autoplay muted loop playsinline poster="">
-        <source src="video_1.mp4" type="video/mp4" />
-        Tu navegador no soporta video.
-      </video>
+    <!-- Selector de pestañas -->
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="switchTab('video-tab', this)">Presentación</button>
+      <button class="tab-btn" onclick="switchTab('form-tab', this)">Registrarse</button>
     </div>
 
-    <!-- Botón con redirección -->
-    <a href="https://qualiconf-xzmwn5at.manus.space/" class="btn-action" target="_blank" rel="noopener">
-      Ver Página de Inicio &rarr;
-    </a>
+    <!-- Pestaña 1: Video + Botón de Redirección -->
+    <div id="video-tab" class="tab-content active">
+      <div class="video-box">
+        <video autoplay muted loop playsinline>
+          <source src="video_1.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <a href="https://qualiconf-xzmwn5at.manus.space/" class="btn-action" target="_blank" rel="noopener">
+        Ver Página de Inicio &rarr;
+      </a>
+    </div>
+
+    <!-- Pestaña 2: Formulario de Registro enviado a tu mail -->
+    <div id="form-tab" class="tab-content">
+      <!-- REMPLAZÁ TU_EMAIL_AQUI@GMAIL.COM POR TU CORREO REAL -->
+      <form action="https://formspree.io/f/qualityconfecciones.online@gmail.com" method="POST">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nombre y Apellido</label>
+            <input type="text" name="nombre" placeholder="Juan Pérez" required />
+          </div>
+          <div class="form-group">
+            <label>Teléfono / WhatsApp</label>
+            <input type="tel" name="telefono" placeholder="11 1234 5678" required />
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <input type="email" name="email" placeholder="usuario@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Localidad / Ciudad</label>
+            <input type="text" name="localidad" placeholder="Buenos Aires" required />
+          </div>
+        </div>
+        <button type="submit" class="btn-action">
+          Enviar Registro
+        </button>
+      </form>
+    </div>
 
   </main>
+
+  <script>
+    function switchTab(tabId, element) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      element.classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
