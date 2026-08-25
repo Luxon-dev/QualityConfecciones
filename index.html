@@ -6,8 +6,8 @@
   <title>Quality Confecciones | Indumentaria & Textil</title>
   
   <!-- Fuentes Google -->
-  <link rel="preconnect" href="foto_1">
-  <link rel="preconnect" href="foto_2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -16,7 +16,7 @@
       --gold-light: #f3e5ab;
       --gold-gradient: linear-gradient(135deg, #e6c875 0%, #d4af37 50%, #997a15 100%);
       --dark-bg: #090b0e;
-      --card-bg: rgba(18, 22, 28, 0.75);
+      --card-bg: rgba(18, 22, 28, 0.85);
       --glass-border: rgba(212, 175, 55, 0.25);
       --text-main: #ffffff;
       --text-sub: #cbd5e1;
@@ -34,6 +34,18 @@
       background-color: var(--dark-bg);
       color: var(--text-main);
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* CANVAS DE FONDO INTERACTIVO EN MOVIMIENTO */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
     }
 
     /* BARRA SUPERIOR (TICKER PUBLICITARIO CORRIDO) */
@@ -48,6 +60,8 @@
       font-size: 0.85rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
+      position: relative;
+      z-index: 101;
     }
 
     .ticker-move {
@@ -180,7 +194,7 @@
     .prev { left: 15px; }
     .next { right: 15px; }
 
-    /* SECCIÓN TARJETAS INFORMATIVAS (DIDÁCTICA) */
+    /* SECCIÓN TARJETAS INFORMATIVAS */
     .features-section {
       max-width: 1200px;
       margin: 80px auto;
@@ -309,6 +323,194 @@
       box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
     }
 
+    /* ACORDEÓN FAQ */
+    .faq-section {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .faq-question {
+      padding: 18px 20px;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 0 20px 18px 20px;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      display: none;
+      line-height: 1.5;
+    }
+
+    /* WIDGET DE CHAT VIRTUAL (UBICADO A LA DERECHA) */
+    .chat-widget-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--gold-gradient);
+      color: #000;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+    .chat-widget-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .chat-box {
+      position: fixed;
+      bottom: 95px;
+      right: 25px;
+      width: 330px;
+      background: #0f1319;
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1000;
+      backdrop-filter: blur(15px);
+    }
+
+    .chat-header {
+      background: var(--gold-gradient);
+      color: #000;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .chat-avatar {
+      width: 32px;
+      height: 32px;
+      background: #000;
+      color: var(--gold-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .chat-body {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .chat-msg {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .chat-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chat-opt-btn {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--gold-primary);
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .chat-opt-btn:hover {
+      background: var(--gold-primary);
+      color: #000;
+    }
+
+    /* BOTÓN WHATSAPP DIRECTO (UBICADO A LA IZQUIERDA PARA EVITAR SUPERPOSICIÓN) */
+    .whatsapp-float {
+      position: fixed;
+      width: 55px;
+      height: 55px;
+      bottom: 25px;
+      left: 25px;
+      background-color: #25d366;
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 28px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    /* NOTIFICACIÓN DE PRUEBA SOCIAL */
+    .social-proof {
+      position: fixed;
+      bottom: 90px;
+      left: 25px;
+      background: #0f1319;
+      border: 1px solid var(--glass-border);
+      padding: 12px 18px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      z-index: 999;
+      font-size: 0.8rem;
+      color: #fff;
+    }
+    .social-proof-icon {
+      font-size: 1.2rem;
+    }
+
     footer {
       text-align: center;
       padding: 30px;
@@ -322,22 +524,26 @@
       .hero-text h1 { font-size: 2.2rem; }
       .form-grid { grid-template-columns: 1fr; }
       .btn-action { grid-column: span 1; }
+      .social-proof { display: none !important; }
     }
   </style>
 </head>
 <body>
+
+  <!-- CANVAS PARA EL FONDO ANIMADO DE RED TEXTIL / HILOS DORADOS -->
+  <canvas id="bgCanvas"></canvas>
 
   <!-- TICKER PUBLICITARIO CORRIDO -->
   <div class="ticker-wrap">
     <div class="ticker-move">
       <div class="ticker-item">✦ QUALITY CONFECCIONES</div>
       <div class="ticker-item">✦ UNIFORMES ESCOLARES Y EMPRESARIALES</div>
-      <div class="ticker-item">✦ ROPA DE TRABAJO Y INDUMENTARIA PERSONALIZADA</div>
+      <div class="ticker-item">✦ ROPA DE TRABAJO E INDUMENTARIA PERSONALIZADA</div>
       <div class="ticker-item">✦ CALIDAD PREMIUM Y DISEÑOS A MEDIDA</div>
       <!-- Repetición para ciclo infinito continuo -->
       <div class="ticker-item">✦ QUALITY CONFECCIONES</div>
       <div class="ticker-item">✦ UNIFORMES ESCOLARES Y EMPRESARIALES</div>
-      <div class="ticker-item">✦ ROPA DE TRABAJO Y INDUMENTARIA PERSONALIZADA</div>
+      <div class="ticker-item">✦ ROPA DE TRABAJO E INDUMENTARIA PERSONALIZADA</div>
       <div class="ticker-item">✦ CALIDAD PREMIUM Y DISEÑOS A MEDIDA</div>
     </div>
   </div>
@@ -360,7 +566,6 @@
     <div class="carousel-container">
       <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
       <div class="carousel-slide" id="slider">
-        <!-- Reemplazá los src con tus imágenes (ej: foto1.jpg, foto2.jpg) -->
         <img src="foto_1.jpg" alt="Confección 1">
         <img src="foto_2.jpg" alt="Confección 2">
         <img src="foto_3.jpg" alt="Confección 3">
@@ -385,7 +590,7 @@
       <div class="card">
         <div class="card-icon">🛠️</div>
         <h3>Ropa de Trabajo</h3>
-        <p>Indumentaria profesional con telas técnicas, costuras reforzadas y normas de seguridad industrial.</p>
+        <p>Indumentaria profesional con telas técnicas, costuras reinforced y normas de seguridad industrial.</p>
       </div>
 
       <div class="card">
@@ -396,7 +601,7 @@
     </div>
   </section>
 
-  <!-- SECCIÓN FORMULARIO DE REGISTRO (CONECTADO A FORMSPREE) -->
+  <!-- SECCIÓN REGISTRO -->
   <section class="form-section" id="registro">
     <h2 class="section-title" style="font-size: 1.8rem;">Registro de Contacto</h2>
     <p class="section-desc">Completa tus datos para enviarte nuestro catálogo y lista de precios actualizados.</p>
@@ -426,12 +631,86 @@
     </form>
   </section>
 
+  <!-- SECCIÓN PREGUNTAS FRECUENTES -->
+  <section class="faq-section">
+    <h2 class="section-title" style="text-align: center; font-size: 1.8rem;">Preguntas Frecuentes</h2>
+    <br>
+    
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Cuál es la cantidad mínima de pedido? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Confeccionamos tanto pedidos corporativos por mayor como lotes personalizados. Consultanos según el tipo de prenda.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Hacen envíos a todo el país? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Sí, realizamos despachos a todo el territorio argentino a través de transporte prioritario y encomiendas.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Cómo solicito una muestra o cotización? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Completá el formulario de contacto o escribinos directamente por WhatsApp indicando el tipo de prenda, cantidades y logo si requiere bordado o estampado.
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTÓN WHATSAPP FLOTANTE (IZQUIERDA) -->
+  <a href="https://wa.me/5491131457691?text=Hola,%20quisiera%20consultar%20por%20presupuestos%20de%20confecci%C3%B3n." class="whatsapp-float" target="_blank" rel="noopener" title="Contactar por WhatsApp">
+    💬
+  </a>
+
+  <!-- WIDGET CHAT VIRTUAL (DERECHA) -->
+  <div class="chat-widget-btn" onclick="toggleChat()">🤖</div>
+
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      <div class="chat-avatar">Q</div>
+      <div>
+        <div>Asistente Quality</div>
+        <div style="font-size: 0.68rem; font-weight: 400; opacity: 0.8;">En línea</div>
+      </div>
+    </div>
+    
+    <div class="chat-body">
+      <div class="chat-msg">
+        ¡Hola! 👋 Bienvenido a Quality Confecciones. ¿En qué te podemos asesorar hoy?
+      </div>
+      
+      <div class="chat-options">
+        <button class="chat-opt-btn" onclick="sendChatOption('Uniformes escolares')">🏫 Presupuesto Uniformes Escolares</button>
+        <button class="chat-opt-btn" onclick="sendChatOption('Ropa de trabajo')">🛠️ Cotizar Ropa de Trabajo</button>
+        <button class="chat-opt-btn" onclick="sendChatOption('Confección personalizada')">🎨 Indumentaria Personalizada</button>
+        <button class="chat-opt-btn" onclick="sendChatOption('Hablar con asesor')">👤 Hablar directamente con un Asesor</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICACIÓN SOCIAL PROOF -->
+  <div class="social-proof" id="socialProof" style="display: none;">
+    <span class="social-proof-icon">🛍️</span>
+    <div>
+      <strong>Nuevo pedido recibido</strong>
+      <div style="color: var(--text-sub); font-size: 0.72rem;">Colegio solicitó 50 chombas bordadas</div>
+    </div>
+  </div>
+
   <footer>
     <p>&copy; Quality Confecciones. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPT PARA EL CARRUSEL -->
+  <!-- JAVASCRIPT PRINCIPAL -->
   <script>
+    // 1. CARRUSEL DE IMÁGENES
     let currentIndex = 0;
     const slider = document.getElementById('slider');
     const totalSlides = slider.children.length;
@@ -441,314 +720,147 @@
       slider.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
-    // Movimiento automático cada 4 segundos
     setInterval(() => {
       moveSlide(1);
     }, 4000);
-  </script>
-  <!-- ESTILOS ADICIONALES PARA BOTÓN FLOTANTE Y FAQ -->
-<style>
-  /* BOTÓN WHATSAPP FLOTANTE */
-  .whatsapp-float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 25px;
-    right: 25px;
-    background-color: #25d366;
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 30px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-  }
-  .whatsapp-float:hover {
-    transform: scale(1.1);
-  }
 
-  /* ACORDEÓN FAQ */
-  .faq-section {
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 0 20px;
-  }
-  .faq-item {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    margin-bottom: 12px;
-    overflow: hidden;
-  }
-  .faq-question {
-    padding: 18px 20px;
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .faq-answer {
-    padding: 0 20px 18px 20px;
-    color: var(--text-sub);
-    font-size: 0.9rem;
-    display: none;
-    line-height: 1.5;
-  }
-</style>
-
-<!-- BOTÓN WHATSAPP FLOTANTE -->
-<a href="https://wa.me/5491131457691?text=Hola,%20quisiera%20consultar%20por%20presupuestos%20de%20confecci%C3%B3n." class="whatsapp-float" target="_blank" rel="noopener">
-  💬
-</a>
-
-<!-- SECCIÓN PREGUNTAS FRECUENTES -->
-<section class="faq-section">
-  <h2 class="section-title" style="text-align: center; font-size: 1.8rem;">Preguntas Frecuentes</h2>
-  <br>
-  
-  <div class="faq-item">
-    <button class="faq-question" onclick="toggleFaq(this)">
-      ¿Cuál es la cantidad mínima de pedido? <span>+</span>
-    </button>
-    <div class="faq-answer">
-      Confeccionamos tanto pedidos corporativos por mayor como lotes personalizados. Consultanos según el tipo de prenda.
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question" onclick="toggleFaq(this)">
-      ¿Hacen envíos a todo el país? <span>+</span>
-    </button>
-    <div class="faq-answer">
-      Sí, realizamos despachos a todo el territorio argentino a través de transporte prioritario y encomiendas.
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question" onclick="toggleFaq(this)">
-      ¿Cómo solicito una muestra o cotización? <span>+</span>
-    </button>
-    <div class="faq-answer">
-      Completá el formulario de contacto o escribinos directamente por WhatsApp indicando el tipo de prenda, cantidades y logo si requiere bordado o estampado.
-    </div>
-  </div>
-</section>
-
-<!-- SCRIPT PARA INTERACTIVIDAD FAQ -->
-<script>
-  function toggleFaq(button) {
-    const answer = button.nextElementSibling;
-    const isVisible = answer.style.display === 'block';
-    
-    document.querySelectorAll('.faq-answer').forEach(el => el.style.display = 'none');
-    document.querySelectorAll('.faq-question span').forEach(el => el.innerText = '+');
-    
-    if (!isVisible) {
-      answer.style.display = 'block';
-      button.querySelector('span').innerText = '-';
+    // 2. ACORDEÓN FAQ
+    function toggleFaq(button) {
+      const answer = button.nextElementSibling;
+      const isVisible = answer.style.display === 'block';
+      
+      document.querySelectorAll('.faq-answer').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.faq-question span').forEach(el => el.innerText = '+');
+      
+      if (!isVisible) {
+        answer.style.display = 'block';
+        button.querySelector('span').innerText = '-';
+      }
     }
-  }
-</script>
-  <!-- ESTILOS Y ESTRUCTURA DEL CHAT VIRTUAL -->
-<style>
-  /* Botón burbuja flotante */
-  .chat-widget-btn {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: var(--gold-gradient);
-    color: #000;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
-    cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-  }
-  .chat-widget-btn:hover {
-    transform: scale(1.08);
-  }
 
-  /* Ventana del Chat */
-  .chat-box {
-    position: fixed;
-    bottom: 95px;
-    right: 25px;
-    width: 330px;
-    background: #0f1319;
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    z-index: 1000;
-    backdrop-filter: blur(15px);
-  }
+    // 3. CHAT WIDGET
+    function toggleChat() {
+      const chat = document.getElementById('chatBox');
+      chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+    }
 
-  .chat-header {
-    background: var(--gold-gradient);
-    color: #000;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
+    function sendChatOption(tipo) {
+      const telefono = "5491131457691";
+      const mensaje = encodeURIComponent(`Hola Quality Confecciones, quisiera solicitar información sobre: ${tipo}.`);
+      window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+    }
 
-  .chat-avatar {
-    width: 32px;
-    height: 32px;
-    background: #000;
-    color: var(--gold-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-  }
-
-  .chat-body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-height: 280px;
-    overflow-y: auto;
-  }
-
-  .chat-msg {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    color: #fff;
-    padding: 10px 14px;
-    border-radius: 12px;
-    font-size: 0.82rem;
-    line-height: 1.4;
-  }
-
-  .chat-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .chat-opt-btn {
-    background: transparent;
-    border: 1px solid var(--glass-border);
-    color: var(--gold-primary);
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .chat-opt-btn:hover {
-    background: var(--gold-primary);
-    color: #000;
-  }
-</style>
-
-<!-- BOTÓN Y VENTANA DE CHAT -->
-<div class="chat-widget-btn" onclick="toggleChat()">💬</div>
-
-<div class="chat-box" id="chatBox">
-  <div class="chat-header">
-    <div class="chat-avatar">Q</div>
-    <div>
-      <div>Asistente Quality</div>
-      <div style="font-size: 0.68rem; font-weight: 400; opacity: 0.8;">En línea</div>
-    </div>
-  </div>
-  
-  <div class="chat-body">
-    <div class="chat-msg">
-      ¡Hola! 👋 Bienvenido a Quality Confecciones. ¿En qué te podemos asesorar hoy?
-    </div>
-    
-    <div class="chat-options">
-      <button class="chat-opt-btn" onclick="sendChatOption('Uniformes escolares')">🏫 Presupuesto Uniformes Escolares</button>
-      <button class="chat-opt-btn" onclick="sendChatOption('Ropa de trabajo')">🛠️ Cotizar Ropa de Trabajo</button>
-      <button class="chat-opt-btn" onclick="sendChatOption('Confección personalizada')">🎨 Indumentaria Personalizada</button>
-      <button class="chat-opt-btn" onclick="sendChatOption('Hablar con asesor')">👤 Hablar directamente con un Asesor</button>
-    </div>
-  </div>
-</div>
-
-<!-- SCRIPT PARA ABRIR/CERRAR Y REDIRIGIR -->
-<script>
-  function toggleChat() {
-    const chat = document.getElementById('chatBox');
-    chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
-  }
-
-  function sendChatOption(tipo) {
-    const telefono = "5491131457691"; // Reemplazá con tu número de WhatsApp
-    const mensaje = encodeURIComponent(`Hola Quality Confecciones, quisiera solicitar información sobre: ${tipo}.`);
-    window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
-  }
-</script>
-  <!-- NOTIFICACIÓN DE PRUEBA SOCIAL -->
-<style>
-  .social-proof {
-    position: fixed;
-    bottom: 25px;
-    left: 25px;
-    background: #0f1319;
-    border: 1px solid var(--glass-border);
-    padding: 12px 18px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    z-index: 999;
-    font-size: 0.8rem;
-    color: #fff;
-    animation: fadeIn 0.5s ease;
-  }
-  .social-proof-icon {
-    font-size: 1.2rem;
-  }
-</style>
-
-<div class="social-proof" id="socialProof" style="display: none;">
-  <span class="social-proof-icon">🛍️</span>
-  <div>
-    <strong>Nuevo pedido recibido</strong>
-    <div style="color: var(--text-sub); font-size: 0.72rem;">Colegio solicitó 50 chombas bordadas</div>
-  </div>
-</div>
-
-<script>
-  // Muestra la notificación a los 4 segundos de entrar a la web
-  setTimeout(() => {
-    document.getElementById('socialProof').style.display = 'flex';
+    // 4. NOTIFICACIÓN PRUEBA SOCIAL
     setTimeout(() => {
-      document.getElementById('socialProof').style.display = 'none';
-    }, 5000);
-  }, 4000);
-</script>
+      const sp = document.getElementById('socialProof');
+      sp.style.display = 'flex';
+      setTimeout(() => {
+        sp.style.display = 'none';
+      }, 5000);
+    }, 4000);
 
+    // 5. FONDO EN MOVIMIENTO INTERACTIVO (RED DE HILOS DORADOS)
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    let particles = [];
+    const particleCount = 65;
+    const maxDistance = 140;
+
+    let mouse = { x: null, y: null, radius: 150 };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.8;
+        this.vy = (Math.random() - 0.5) * 0.8;
+        this.radius = Math.random() * 2 + 1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        if (mouse.x !== null && mouse.y !== null) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            let angle = Math.atan2(dy, dx);
+            let force = (mouse.radius - dist) / mouse.radius;
+            this.x -= Math.cos(angle) * force * 2;
+            this.y -= Math.sin(angle) * force * 2;
+          }
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(212, 175, 55, 0.6)';
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let dx = particles[i].x - particles[j].x;
+          let dy = particles[i].y - particles[j].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDistance) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            let alpha = 1 - (dist / maxDistance);
+            ctx.strokeStyle = `rgba(212, 175, 55, ${alpha * 0.25})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    initParticles();
+    animate();
+  </script>
 </body>
 </html>
